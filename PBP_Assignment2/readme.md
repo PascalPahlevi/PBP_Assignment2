@@ -53,7 +53,6 @@ __Implement registration, login, and logout functions to allow users to access t
 
 To begin with, I started by making changes to the 'views.py' file which were to make the necessary imports that being 'redirect', 'UserCreationForm', and 'messages'. Once I finished with this, I then created a new function called 'register' which can be seen below:
 
-'''py
 def register(request):
     form = UserCreationForm()
 
@@ -65,10 +64,9 @@ def register(request):
             return redirect('main:login')
     context = {'form':form}
     return render(request, 'register.html', context)
-'''
+
 Once implementing the wesbite's registration, I went ahead and continued in creating a login function and to do this I went back and added more imports to 'views.py' which were 'authenticate' and 'login'. Then, I created a new function called 'login_user' which can be seen below:
 
-'''py
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -81,15 +79,13 @@ def login_user(request):
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {}
     return render(request, 'login.html', context)
-'''
 
 To finish it all off, I then imported 'logout' into 'views.py' to start adding the logout function to the website. I created another function called 'logout_user' as shown below:
 
-'''py
 def logout_user(request):
     logout(request)
     return redirect('main:login')
-'''
+
 __Create two user accounts with three dummy data entries for each account using the model previously created in the application.__ <br>
 
 Doing this was quite simple, I simply connected to the local host after running 'python manage.py runserver' then registered two new accounts into the website. After doing so, I added three different products on each account.
@@ -98,7 +94,6 @@ __Connect Item model with User__ <br>
 
 To connect the item model with user, I first went to 'models.py' and imported 'User'. Once I did, I went to the 'create_product' function and made changes to the existing code as shown below:
 
-'''py
 def create_product(request):
 form = ProductForm(request.POST or None)
 
@@ -107,7 +102,7 @@ if form.is_valid() and request.method == "POST":
     product.user = request.user
     product.save()
     return HttpResponseRedirect(reverse('main:show_main'))
-'''
+
 
 
 
