@@ -4,10 +4,22 @@
 
 URL:
 
-1. 
+1. To begin with this assignment, I started by creating a Django project first, in order to do so making sure I installed the right dependencies, I created a new directory as well as initialized a new virtual environment. Afterwards, I created a text file with all the dependencies I needed and installed them before eventually creating the Django project. Once I did all those, I made sure first that I was able to run the server and once I had done that, I uploadaed the files into a newly created github repository. <br>
 
-2. 
+   After finishing with the intial setup, I started working on the html file which I named as "main". This file would then be inserted a new folder named "template" and in doing so made it easier to separate the main.html with the other files. With the html file created, I was then able to make and add changes which I see fit the theme of my app and further proceeded with the URl routing. In doing so, I was able to make sure that the "main.html" would be displayed when the url is visited. Finally, I finished everything by deploying the app using Adaptable.
 
-3. The purpose of a virtual environment is to help install the required packages for different projects and isolating them in different environments. Since a Django web app requires multiple packages and dependencies, a virtual environment must be used to create one.
+2.
+   ![image](https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/a2031cb2-5a30-4533-8f64-53b6e78f3119)
 
-4. MVC, MVT, and MVVM are all frequently used design templates.
+
+4. The purpose of a virtual environment is to help install the required packages for different projects and isolating them in different environments. Since a Django web app requires multiple packages and dependencies, a virtual environment must be used to create one.
+
+5. MVC, MVT, and MVVM are all frequently used design templates. The MVC framework can be separated into three main components: Model, View, Controller. This framework provides a separation between UI logic, input logic, and business logic and is one of the most frequently used web development frameworks currently. The MVT framework is a design pattern for web development which is separated into three main components: Model, View, Template. This structure is typically used for Django projects. The MVVM is a framework that solves all the problems that the MVT and MVC have. This framework can be separated into three layers: Model, View, ViewModel. 
+
+6. In DJANGO, the GET method is used to compose a URL which is done by using the submitted data to form a string. On the other hand, the POST method allows clients to send out data and afterwards the browser bundles up the data and processes it.
+
+7. In terms of data delivery, XML, JSON, and HTML all have different uses. XML (Extensible Markup Language) is mainly used in structuring and describing data in a format that allows both humans and machines to read them. JSON (JavaScript Object Notation) can be said to be an alternative to XML and is generally used to transmit data between a web application and the server. HTML (HyperText Markup Language) is used to create and organize the structure of the web pages. In short, a way to display the data for others to see.
+
+8. A few reasons as to why JSON is often used in data exchange between modern web application is because its easy to read and write. JSON is human-readable thus giving developers a much easier time to understand the code written, especially for debugging. Apart from that, JSON is also really lightweight and efficient.
+
+9. 
