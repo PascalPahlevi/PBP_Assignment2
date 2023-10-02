@@ -11,6 +11,11 @@ URL:
 2.
    ![image](https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/a2031cb2-5a30-4533-8f64-53b6e78f3119)
 
+3. <img width="1280" alt="image" src="https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/ef1dc1d1-c81b-4a48-a5d8-ae43a7b6c6b3">
+<img width="1280" alt="image" src="https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/dbbd92c8-a505-42a5-a631-eb1dd9e71dfe">
+<img width="1280" alt="image" src="https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/686fe912-ec24-4349-9547-c246f98a2840">
+<img width="1280" alt="image" src="https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/39f1ab71-4612-4d90-8512-7baa782a78f2">
+<img width="1280" alt="image" src="https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/f3182564-5df6-4531-aa6a-baf7a4ca1f45">
 
 4. The purpose of a virtual environment is to help install the required packages for different projects and isolating them in different environments. Since a Django web app requires multiple packages and dependencies, a virtual environment must be used to create one.
 
@@ -22,4 +27,89 @@ URL:
 
 8. A few reasons as to why JSON is often used in data exchange between modern web application is because its easy to read and write. JSON is human-readable thus giving developers a much easier time to understand the code written, especially for debugging. Apart from that, JSON is also really lightweight and efficient.
 
-9. 
+9. d
+
+# Assignment 4
+
+## Display the information of the logged-in user, such as their username, and applying cookies, such as last login, on the main application page.
+<img width="1280" alt="image" src="https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/d59563d6-1afa-4748-81c1-b488d082622e">
+<img width="1280" alt="image" src="https://github.com/PascalPahlevi/PBP_Assignment2/assets/143638456/11e1f878-2706-4d11-8d78-0d638f1ff1ca">
+
+## What is UserCreationForm in Django? Explain its advantages and disadvantages.
+  In Django, UserCreationForm is built-in form that can be used through the Django framework to enable the handling of user registration and creation. Among others, a few of its advantages are convenience and security. Since the form is directly built-in through the Django framework, creating a user registration is as simple as a few lines of code. Apart from that, the UserCreationForm also has built-in validation fields for username and password, also making checks on whether the username and password are appropriate. However, one of its disadvantages also come from the fact that it may be too simple for more complex requirements.
+
+##  What is the difference between authentication and authorization in Django application? Why are both important
+   Authentication refers to the process of verifying the identity of the user whereas Authorization is the process whether said user has the necessary privileges to access certain resources. Both authentication and authorization are important in their own ways. For example, in the case of security, authenticatiojn is used to ensure that authorized users can access certain parts of the website. On the other hand, authorization is also important for security because it ensures that users are only given access to parts of the website that they are given permission to access. When both authentication and authorization are both combined, it would then increase the overall security.
+
+## What are cookies in website? How does Django use cookies to manage user session data?
+   Cookies are essentially pieces of data that are sent to a user's browser to be stored on their device by a website. Typically they are used in order to maintain information how the user has been interacting with the website. On Django, the way cookies work is that a request is initially sent to the server by the browser, then the servers conveys the response to the browser, afterwards the cookie that the browser initially received from the server is saved. With this, the browser will always send that cookie to the server upon receiving a request up until the cookie expires. Finally, when the cookie does expire, it will ultimately be removed from the browser.
+
+## Are cookies secure to use? Is there potential risk to be aware of? 
+   Since cookies are essential to web development, with the proper implementation and management they are most definitely secure, however, there are still some potential risks to look out for when it comes to cookies. Among those, a concerning issue when it comes to cookies would be the the risk of data exposure, Since in the first place, cookies may potentially store sensitive user information, if a browser's cookies are not managed properly it could potentially lead to the exposure of the user's data thus also violating their privacy.
+
+## Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+
+__Implement registration, login, and logout functions to allow users to access the previous application.__<br>
+
+To begin with, I started by making changes to the `views.py` file which were to make the necessary imports that being `redirect`, `UserCreationForm`, and `messages`. Once I finished with this, I then created a new function called `register` which can be seen below:
+
+```py
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+```
+
+Once implementing the wesbite's registration, I went ahead and continued in creating a login function and to do this I went back and added more imports to `views.py` which were `authenticate` and `login`. Then, I created a new function called `login_user` which can be seen below:
+
+```py
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('main:show_main')
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+```
+
+To finish it all off, I then imported `logout` into `views.py` to start adding the logout function to the website. I created another function called `logout_user` as shown below:
+
+```py
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
+
+__Create two user accounts with three dummy data entries for each account using the model previously created in the application.__ <br>
+
+Doing this was quite simple, I simply connected to the local host after running `python manage.py runserver` then registered two new accounts into the website. After doing so, I added three different products on each account.
+
+__Connect Item model with User__ <br>
+
+To connect the item model with user, I first went to `models.py` and imported `User`. Once I did, I went to the `create_product` function and made changes to the existing code as shown below:
+
+```py
+def create_product(request):
+form = ProductForm(request.POST or None)
+
+if form.is_valid() and request.method == "POST":
+    product = form.save(commit=False)
+    product.user = request.user
+    product.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+```
+
+
+
