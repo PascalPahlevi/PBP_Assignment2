@@ -31,7 +31,7 @@ def create_item(request):
     form = ItemForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        item = form.save()
+        item = form.save(commit=False)
         item.user = request.user
         item.save()
         return HttpResponseRedirect(reverse('main:show_main'))
@@ -87,3 +87,26 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_product(request, id):
+    # Get product by ID
+    product = Item.objects.get(pk = id)
+
+    # Set product as instance of form
+    form = ItemForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Save the form and return to home page
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    # Get data by ID
+    product = Item.objects.get(pk=id)
+    # Delete data
+    product.delete()
+    # Return to the main page
+    return HttpResponseRedirect(reverse('main:show_main'))
