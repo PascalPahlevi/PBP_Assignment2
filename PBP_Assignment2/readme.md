@@ -111,5 +111,143 @@ if form.is_valid() and request.method == "POST":
     return HttpResponseRedirect(reverse('main:show_main'))
 ```
 
+# Assignment 5
+
+## Explain the purpose of some CSS element selector and when to use it.
+
+The CSS element selector is typically used to allow us to manually select the HTML elements within our web pages which makes it much easier to design and style them. Some ways in which it can be used is for example to change the websites background color, background images or in some more complex cases add buttons, navigation bars, etc.
+
+## Explain some of the HTML5 tags that you know.
+
+Among the many HTML5 tags that exist, the ones I am most familiar with are <h1> to <h6> tags, the <table> tag, and the <title> tag. To begin with, the <h1> to <h6> tag can be used to define HTML headings. These tags allow us to change the size of the text, whether we want it larger or smaller. For the <table> tag, it can be used to define and create tables within the website. This can be useful in listing data sets or if we want a way in presenting data cleanly within the website. Finally, we have the <title> tag which, to put simply, defines the title of the document.
+
+## What are the differences between margin and padding?
+
+Padding can be referred to as the amount of space an element has inside whereas a margin is the space surrounding the element.
+
+## What are the differences between the CSS framework Tailwind and Bootstrap? When should we use Bootstrap rather than Tailwind, and vice versa?
+
+Both Tailwind and Bootstrap are popoular CSS frameworks however they offer different approaches in creating attractive and responsive websites. To begin with, Tailwind offers a utility-first approach meaning that the styes are directly implemented into the HTML. On the other hand, Bootstrap works with a component-based approach that comes with pre-styled components like buttons and navigation bars that can be directly customized. Apart from that, Tailwind allows for more customization and flexibility which allows us to style our websites with unique designs freely without the need for custom CSS whereas Bootstrap has a more straightforward customization in which users simply need to pick the styles they want and then further customize them if they wish to do so.
+
+When it comes to which one to use, it is more towards the developer's preference and choosing the more suitable framework depending on the needs and requirements of the websites design.
+
+## Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+
+__Customize login, register, and add item page as creative as possible.__ <br>
+
+For my assignment, I decided to use Bootstrap mainly because of its simplicity. I first decided to make changes to the login page and my idea for this page was to center the login form itself, while also adding buttons and a placeholder stock image just to make things cleaner. The code for this can be seen below:
+
+```py
+<div class = "login text-center">
+    <form method="POST" action="" style="max-width: 350px;margin: auto;">
+        {% csrf_token %}
+        <img class ="mt-5 mb-3" src="https://cdn.pixabay.com/photo/2019/06/10/15/11/basketball-4264543_1280.png" height="75">
+        <h1>Login</h1>
+        <label for="username"class="visually-hidden">Username</label>
+        <input type="text" name="username" placeholder="Username" class="form-control mt-3 mb-3">
+        <label for="password" class="visually-hidden">Password</label>
+        <input type="password" name="password" placeholder="Password" class="form-control">
+        <div class="mt-3 mb-3">
+            <button class="btn login_btn btn-block btn-dark" type="submit" value="login">Login</button>
+        </div>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+</div>
+```
+
+Once done with the login page, I worked on the register page. For this page, I decided to not complicate things too much and simply implemented a card design and changing the background colour to grey. The code for this is shown below:
+
+```py
+<div class = "text-center">
+        <form method="POST" style="max-width: 350px; margin: auto;" >  
+            <h1 class="mt-5 mb-3">Create Account</h1>  
+            {% csrf_token %}  
+            <table class="card" style="padding: 15px; background: darkgrey;">  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>
+                    <td><input class= "mt-3" type="submit" name="submit" value="Register"/></td>                  </tr>  
+            </table>  
+
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+{% endblock content %}
+```
+
+Finally, I went on to customize the add item page. For this page, I basically implemented the same idea as I did with the register page as shown in the code below:
+
+```py
+<form method="POST" class="card" style="width: 500px; padding: 20px; margin: auto;">
+    {% csrf_token %}
+    <table style="margin: auto; padding: 20px;">
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input class="mt-2" type="submit" value="Add Product"/>
+            </td>
+        </tr>
+    </table>
+</form>
+```
+
+__Customize the inventory list page so it becomes more attractive, either by adding colors or using another approach (such as Cards) to show the items, or both.__ <br>
+
+When it came to customizing the inventory list page, there was quite a few things that I did to make the page look much cleaner than it initially was. First off, I decided to add a navbar which showed the username, the page name, and some other miscellaneous features such as contacts. In addition to that, I also wanted to continue with the card design and managed to do so for each item in the inventory list, making sure that it was also responsive and worked when adding more items, editing items, and deleting items. The code for this can be seen below:
+
+```py
+    {% for item in items %}
+
+    <div class="card mb-3 mt-5 border border-dark" style="max-width: 1000px; margin: auto;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://cdn.pixabay.com/photo/2020/02/10/11/09/smiley-4836178_1280.png" class="img-fluid rounded-start">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{item.name}}</h5>
+              <p class="card-text">Price: {{item.price}}</p>
+              <p class="card-text">Description {{item.description}}</p>
+              <a href="{% url 'main:edit_product' id=item.pk %}">
+                <button class="rounded-pill mt-3">
+                  Edit
+                </button>
+              </a>
+              <a href="{% url 'main:delete_product' id=item.pk %}">
+                <button class="rounded-pill mt-3">
+                  Delete
+                </button>
+              </a>
+              <p class="card-text mt-5"><small class="text-muted">Item added on {{item.date_added}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <h5>Last login session: {{ last_login }}</h5>
+
+{% endblock content %}
+```
+
+
+
+
 
 
