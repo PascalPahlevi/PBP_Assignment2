@@ -119,7 +119,7 @@ The CSS element selector is typically used to allow us to manually select the HT
 
 ## Explain some of the HTML5 tags that you know.
 
-Among the many HTML5 tags that exist, the ones I am most familiar with are <h1> to <h6> tags, the <table> tag, and the <title> tag. To begin with, the <h1> to <h6> tag can be used to define HTML headings. These tags allow us to change the size of the text, whether we want it larger or smaller. For the <table> tag, it can be used to define and create tables within the website. This can be useful in listing data sets or if we want a way in presenting data cleanly within the website. Finally, we have the <title> tag which, to put simply, defines the title of the document.
+Among the many HTML5 tags that exist, the ones I am most familiar with are "<h1> to <h6>" tags, the "<table>" tag, and the "<title>" tag. To begin with, the "<h1> to <h6>" tag can be used to define HTML headings. These tags allow us to change the size of the text, whether we want it larger or smaller. For the "<table>" tag, it can be used to define and create tables within the website. This can be useful in listing data sets or if we want a way in presenting data cleanly within the website. Finally, we have the "<title>" tag which, to put simply, defines the title of the document.
 
 ## What are the differences between margin and padding?
 
