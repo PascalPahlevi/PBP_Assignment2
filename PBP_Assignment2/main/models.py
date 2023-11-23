@@ -8,3 +8,4 @@ class Item(models.Model):
     price = models.IntegerField()
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rarity = models.CharField(max_length=3)

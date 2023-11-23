@@ -4,20 +4,19 @@
 
 <br>
 
-</div>
-
     {% for item in items %}
 
     <div class="card mb-3 mt-5 border border-dark" style="max-width: 1000px; margin: auto;">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="https://cdn.pixabay.com/photo/2020/02/10/11/09/smiley-4836178_1280.png" class="img-fluid rounded-start">
+            <img src="" class="img-fluid rounded-start">
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{item.name}}</h5>
               <p class="card-text">Price: {{item.price}}</p>
-              <p class="card-text">Description {{item.description}}</p>
+              <p class="card-text">Description: {{item.description}}</p>
+              <p class="card-text"> Rarity: {{item.rarity}}</p>
               <a href="{% url 'main:edit_product' id=item.pk %}">
                 <button class="rounded-pill mt-3">
                   Edit
@@ -34,7 +33,15 @@
         </div>
       </div>
     {% endfor %}
+    
+  <div class="text-center">
+    <a href="{% url 'main:create_product' %}">
+      <button class="rounded-pill mt-3 mb-3">
+          Add New Product
+      </button>
+    </a>
 
     <h5>Last login session: {{ last_login }}</h5>
+  </div>
 
 {% endblock content %}
